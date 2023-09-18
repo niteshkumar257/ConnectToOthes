@@ -19,12 +19,14 @@ const UserSchema = mongoose.Schema(
             type: Boolean,
             default: false,
         },
-        profilePicture: String,
-        coverPicture: String,
-        about: String,
-        livesin: String,
-        worksAt: String,
-        relationship: String,
+        profilePicture:{type: String,default:""},
+        coverPicture: {type:String,default:""},
+        about: {type:String,default:""},
+        livesin:{type: String,default:""},
+        worksAt:{type:String,default:""},
+        relationship: {
+         type:String,default:""
+        },
         followers: [] ,
         following: []
     },
