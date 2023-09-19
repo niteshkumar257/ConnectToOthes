@@ -1,5 +1,6 @@
 import UserModel from "../Models/userModel.js";
 import bcrypt from "bcrypt";
+
 // get a User
 export const getUser = async (req, res) => {
   const id = req.params.id;
@@ -8,6 +9,8 @@ export const getUser = async (req, res) => {
     const user = await UserModel.findById(id);
 
     if (user) {
+     
+      console.log(user);
       const { password, ...otherDetails } = user._doc;
 
       res.status(200).json(otherDetails);
@@ -22,9 +25,11 @@ export const getUser = async (req, res) => {
 // update a user
 export const updateUser = async (req, res) => {
   const id = req.params.id;
-  const { currentUserId, currentUserAdminStatus, password } = req.body;
-
-  if (id === currentUserId || currentUserAdminStatus) {
+  const { userId, currentUserAdminStatus, password } = req.body;
+ 
+   console.log("req",req.body.formData);
+   
+  if (id === userId || currentUserAdminStatus) {
     try {
       if (password) {
         const salt = await bcrypt.genSalt(10);
@@ -35,6 +40,8 @@ export const updateUser = async (req, res) => {
         new: true,
       });
 
+    
+       
       res.status(200).json(user);
     } catch (error) {
       res.status(500).json(error);
@@ -113,3 +120,16 @@ export const UnFollowUser = async (req, res) => {
     }
   }
 };
+export const getAllUser=async(req,res)=>
+{
+    try{
+      const users=await UserModel.find();
+
+      
+        res.status(201).json({users:users});
+    }
+    catch(error){
+      res.status(500).json({error:error});
+    }
+    
+}
