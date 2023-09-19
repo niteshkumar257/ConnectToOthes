@@ -11,6 +11,20 @@ import cors from "cors";
 
 
 
+const allowedOrigins = ['https://web-f7vi.onrender.com/login', 'http://localhost:3000'];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
+
+
 
 const app = express();
 
@@ -18,7 +32,7 @@ const app = express();
 
 // Middleware
 app.use('/images', express.static('public/images'));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
