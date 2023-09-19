@@ -11,7 +11,7 @@ import cors from "cors";
 
 
 
-const allowedOrigins = ['http://localhost:3000'];
+const allowedOrigins = ['http://localhost:3000',"https://web-f7vi.onrender.com"];
 
 const corsOptions = {
   origin: function (origin, callback) {
