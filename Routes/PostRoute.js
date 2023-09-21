@@ -22,14 +22,14 @@ const storage=multer.diskStorage({
 router.post('/createPost',upload.single('file'), async (req, res) => {
     const { userId, desc } = req.body;
   
-     console.log(userId,desc);
+   
   
-     console.log(26,req.file.filename);
+    
      try {
      const newPost = await PostModel.create({
         userId: userId,
         desc:desc,
-        image:req.file.filename,
+        image:req.file?.filename,
       });
     
       res.status(200).json({ post: newPost });
